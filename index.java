@@ -81,5 +81,51 @@ public class index{
         }
         return new int[]{-1,-1};
     }
+
+
+    //Split array largest sum
+    public static void main(String[] args) {
+        int [] arr = {7,2,5,10,8};
+        int [] arr2 = {8,7,12,6,9,7,13,10};
+        int m =2;
+        int m2 = 4;
+        int ans = search(arr,m);
+        System.out.println(ans);
+        System.out.println(sals(arr2,m));
+        System.out.println(sals(arr2,m2));
+    }
+
+    static int sals(int[] arr ,int m){
+        int start = 0;
+        int end   = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            start = Math.max(start,arr[i]);
+            end  += arr[i];
+        }
+
+        while(start < end){
+            int mid = start +(end-start)/2;
+            int sum = 0;
+            int pieces = 1;
+
+            for(int num : arr){
+                if(sum + num > mid){
+                    sum = num;
+                    pieces++;
+                }else{
+                    sum += num;
+                }
+            }
+
+            if(pieces > m){
+                start = mid + 1;
+            }else {
+                end = sum;
+            }
+        }
+
+        return end;
+    }
     
 }
